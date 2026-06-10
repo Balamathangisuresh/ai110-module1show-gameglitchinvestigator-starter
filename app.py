@@ -1,13 +1,13 @@
 import random
 import streamlit as st
-
+# FIX: Changed logic so that the difficulty matches the range of numbers.
 def get_range_for_difficulty(difficulty: str):
     if difficulty == "Easy":
         return 1, 20
     if difficulty == "Normal":
-        return 1, 100
-    if difficulty == "Hard":
         return 1, 50
+    if difficulty == "Hard":
+        return 1, 100
     return 1, 100
 
 
@@ -28,23 +28,23 @@ def parse_guess(raw: str):
 
     return True, value, None
 
-
 def check_guess(guess, secret):
     if guess == secret:
         return "Win", "🎉 Correct!"
-
+#FIX: Hint is reversed. If guess is higher than secret, it should say "Go LOWER!" and vice versa.
     try:
         if guess > secret:
-            return "Too High", "📈 Go HIGHER!"
+            return "Too High", "📉 Go LOWER!"
         else:
-            return "Too Low", "📉 Go LOWER!"
+            return "Too Low", "📈 Go HIGHER!"
     except TypeError:
         g = str(guess)
         if g == secret:
             return "Win", "🎉 Correct!"
-        if g > secret:
-            return "Too High", "📈 Go HIGHER!"
-        return "Too Low", "📉 Go LOWER!"
+        #FIX: Type Casts the strings to ints before comparing
+        if int(g) > int(secret):
+            return "Too High", "📉 Go LOWER!"
+        return "Too Low", "📈 Go HIGHER!"
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):

@@ -8,14 +8,20 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - List at least two concrete bugs you noticed at the start  
   (for example: "the hints were backwards").
 
+  The history of guesses did not properly update (the first number inputted is not included then for every new number you input the previous guess was registered)
+
+  New game button does not work (the game thinks you are in the same state as the previous round (won/lost) so doesn't let you enter a guess and doesn't clear the history of the previous round but gives you a new number as the secret number).
+
+  Hints are backwards (when i guess a number higher than the secret number the hint says to go higher and vice verca).
+
 **Bug Reproduction Log**
 
 Document at least 3 bugs you found. Add rows as needed.
 
 | Input | Expected Behavior | Actual Behavior | Console Output / Error |
-|-------|-------------------|-----------------|------------------------|
-| | | | |
-| | | | |
+|guess of 100|Hint: go lower|hint: go higher|none|
+|clicked button: new game |reset the secret number, the number of guessesto 8, clear history, and allow guesses to be inputted |doesn't clear history and doesn't let guesses to be inputted|none |
+|first guess of 6 |history array: [6] |history of array: [] |none |
 | | | | |
 
 ---
