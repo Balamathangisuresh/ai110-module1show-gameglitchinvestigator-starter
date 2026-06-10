@@ -44,9 +44,10 @@ def check_guess(guess, secret):
         #FIX: Type Casts the strings to ints before comparing
         if int(g) > int(secret):
             return "Too High", "📉 Go LOWER!"
-        return "Too Low", "📈 Go HIGHER!"
+        else:
+            return "Too Low", "📈 Go HIGHER!"
 
-
+#FIX: outcome of too high and too low guesses both deduct 5 points consistently
 def update_score(current_score: int, outcome: str, attempt_number: int):
     if outcome == "Win":
         points = 100 - 10 * (attempt_number + 1)
@@ -55,8 +56,6 @@ def update_score(current_score: int, outcome: str, attempt_number: int):
         return current_score + points
 
     if outcome == "Too High":
-        if attempt_number % 2 == 0:
-            return current_score + 5
         return current_score - 5
 
     if outcome == "Too Low":
@@ -91,9 +90,9 @@ st.sidebar.caption(f"Attempts allowed: {attempt_limit}")
 
 if "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
-
+#Fix: initialized attemps to 0 not 1
 if "attempts" not in st.session_state:
-    st.session_state.attempts = 1
+    st.session_state.attempts = 0
 
 if "score" not in st.session_state:
     st.session_state.score = 0
@@ -131,9 +130,13 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
+#Fix: New game button was resetting the secret number but not the attempts, score, or history. Now it resets all of those to start fresh. Also added a success message when starting a new game.
 if new_game:
     st.session_state.attempts = 0
-    st.session_state.secret = random.randint(1, 100)
+    st.session_state.secret = random.randint(low, high)
+    st.session_state.history = []
+    st.session_state.status = "playing"
+    st.session_state.score = 0
     st.success("New game started.")
     st.rerun()
 
