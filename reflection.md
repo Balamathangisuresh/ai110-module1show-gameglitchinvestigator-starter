@@ -22,7 +22,7 @@ Document at least 3 bugs you found. Add rows as needed.
 |guess of 100|Hint: go lower|hint: go higher|none|
 |clicked button: new game |reset the secret number, the number of guessesto 8, clear history, and allow guesses to be inputted |doesn't clear history and doesn't let guesses to be inputted|none |
 |first guess of 6 |history array: [6] |history of array: [] |none |
-| | | | |
+|choosing difficulty: normal |range: 0-50 |range: 0-100 |none |
 
 ---
 
@@ -32,7 +32,9 @@ Document at least 3 bugs you found. Add rows as needed.
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
----
+- Claude
+- Claude suggested that the even attempts of too high guesses rewards points which doesn't make sense logically for this guessing game. And I tested this on the app noticing how the points are calculated and it was incorrect. I asked Claude to make these changes and tested the game again.
+- Claude suggested that there is no else block to catch the too low guess for the check_guess function but there clearly was one so I didn't accept its suggestion.
 
 ## 3. Debugging and testing your fixes
 
