@@ -1,15 +1,5 @@
 import random
 import streamlit as st
-# FIX: Changed logic so that the difficulty matches the range of numbers.
-def get_range_for_difficulty(difficulty: str):
-    if difficulty == "Easy":
-        return 1, 20
-    if difficulty == "Normal":
-        return 1, 50
-    if difficulty == "Hard":
-        return 1, 100
-    return 1, 100
-
 
 def parse_guess(raw: str):
     if raw is None:
@@ -27,6 +17,17 @@ def parse_guess(raw: str):
         return False, None, "That is not a number."
 
     return True, value, None
+
+
+def get_range_for_difficulty(difficulty: str):
+    # FIX: Changed logic so that the difficulty matches the range of numbers.
+    if difficulty == "Easy":
+        return 1, 20
+    if difficulty == "Normal":
+        return 1, 50
+    if difficulty == "Hard":
+        return 1, 100
+    return 1, 100
 
 def check_guess(guess, secret):
     if guess == secret:
@@ -110,13 +111,6 @@ st.info(
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
-with st.expander("Developer Debug Info"):
-    st.write("Secret:", st.session_state.secret)
-    st.write("Attempts:", st.session_state.attempts)
-    st.write("Score:", st.session_state.score)
-    st.write("Difficulty:", difficulty)
-    st.write("History:", st.session_state.history)
-
 raw_guess = st.text_input(
     "Enter your guess:",
     key=f"guess_input_{difficulty}"
@@ -189,6 +183,13 @@ if submit:
                     f"The secret was {st.session_state.secret}. "
                     f"Score: {st.session_state.score}"
                 )
+#Fix: history displays current guess immediately
+with st.expander("Developer Debug Info"):
+    st.write("Secret:", st.session_state.secret)
+    st.write("Attempts:", st.session_state.attempts)
+    st.write("Score:", st.session_state.score)
+    st.write("Difficulty:", difficulty)
+    st.write("History:", st.session_state.history)
 
 st.divider()
 st.caption("Built by an AI that claims this code is production-ready.")
