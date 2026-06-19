@@ -33,21 +33,21 @@ It wrote the code, ran away, and now the game is unplayable.
 
    1. Point calculation sometimes increased when a wrong guess was entered.
 
-   2. The history doesn't update current guess but previous guess or doesn't update when the guess is the first guess because there is no previous guess.
+   2. The history doesn't update current guess but updates the previous guess or doesn't update when the guess is the first guess (because there is no previous guess).
 
-   3. Normal has a larger range than Hard difficulty.
+   3. Normal difficulty has a larger range of numbers than Hard difficulty.
 
-   4. Hints are reversed (when i guess a number higher than the secret number the hint says to go higher not lower and when i guess a number lower than the secret number the hint says to go lower not higher).
+   4. Hints are reversed (when I guess a number higher than the secret number the hint says to go higher not lower and when I guess a number lower than the secret number the hint says to go lower not higher).
 
-   5. New game button does not work (the game thinks you are in the same state as the previous round (won/lost) so doesn't let you enter a guess and doesn't clear the history of the previous round but gives you a new number as the secret number).
+   5. New game button does not work (the game thinks you are in the same state as the previous round (won/lost) so it doesn't let you enter a guess and doesn't clear the history of the previous round but gives you a new secret number).
 
 - [ ] Explain what fixes you applied.
 
    1. Original update_score added points for an even attempt of a guess that is too high which is not consistent with the points calculation so this was changed so both wrong guess outcomes consistently subtract 5 points from the score.
 
-   2. History was originally rendered before the guess was submitted by the user so it always showed the history before the current guess. This was fixed by moving the code for the Developer Debug Info to the bottom of the python script after the code for the submit button so the history shows the current guess.
+   2. History was originally rendered before the guess was submitted by the user so it always showed the history before the current guess. This was fixed by moving the code for the Developer Debug Info to the bottom of the python script after the code for the submit button so the history updates with the current guess.
 
-   3. Original get_range_for_difficulty had mismatched ranges so that Hard had a smaller range and therefore was easier than Normal. This was fixed so that the ranges scale correctly to each difficulty: Easy's range 1–20, Normal's range 1–50, Hard's range = 1–100.
+   3. Original get_range_for_difficulty had mismatched ranges so that Hard had a smaller range and therefore was easier than Normal. This was fixed so that the ranges scale correctly to each difficulty: Easy's range 1–20, Normal's range 1–50, Hard's range 1–100.
 
    4. Original check_guess returned "Go HIGHER!" when the guess was too high, and "Go LOWER!" when the guess was too low. Fixed by swapping the inequalities so guess > secret → "Too High", "📉 Go LOWER!" else the guess was too low "Too Low", "📈 Go HIGHER!" (The equal case was already checked).
 

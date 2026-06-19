@@ -12,7 +12,7 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
   New game button does not work (the game thinks you are in the same state as the previous round (won/lost) so doesn't let you enter a guess and doesn't clear the history of the previous round but gives you a new number as the secret number).
 
-  Hints are backwards (when i guess a number higher than the secret number the hint says to go higher and vice verca).
+  Hints are backwards (when I guess a number higher than the secret number the hint says to go higher and vice verca).
 
 **Bug Reproduction Log**
 
@@ -37,7 +37,7 @@ Document at least 3 bugs you found. Add rows as needed.
 
   - Claude suggested that the even attempts of too high guesses rewards points which doesn't make sense logically for this guessing game. And I tested this on the app noticing how the points are calculated and it was incorrect. I asked Claude to make these changes and tested the game again to check if the points were calculated correctly. After Claude made those changes the points system logically makes more sense.
 
-  - Claude suggested that there is no else block to catch the too low guess in the check_guess function but there clearly was one so I didn't accept its suggestion. It's suggestion attempted to change the entire structure of the function which was very redundant and not the cause of the hints being incorrect.
+  - Claude suggested that there is no else block to catch the too low guess in the check_guess function but there clearly was one so I didn't accept its suggestion. When I reviewed it's suggestion, it attempted to change the entire structure of the function which was very redundant and did not the fix the hints being incorrect.
 
 ## 3. Debugging and testing your fixes
 
@@ -46,11 +46,11 @@ Document at least 3 bugs you found. Add rows as needed.
   and what it showed you about your code.
 - Did AI help you design or understand any tests? How?
 
-  - I decided when the bug was really fixed after running through tests of my own by running the app and trying to reproduce the same bug and see if the bug shows up including testing edge cases. For some fixes I also asked claude to make pytests and verified each pytest and ran them and also tested them myself by running the app. 
+  - I decided when the bug was really fixed after running through tests of my own. I did this by running the app and trying to reproduce the same bug and see if the bug shows up. Then I tested edge cases. For some fixes I also asked Claude to make pytests and verified each pytest and ran them and also tested them myself by running the app. 
 
-  - One test I ran manually was to check whether the hints were correct or not. For that, after Claude made its changes, I ran the app and checked the secret number. I made guesses above and below the secret number to make sure the hints were correct. I also made sure to check edge cases like 1 and 50 for normal and 1 to 20 for easy and 1 to 100 for hard, numbers one under or over the secret number and the actual secret number to check if the winning condition was still working.
+  - One test I ran manually was to check whether the hints were correct or not. For that, after Claude made its changes, I ran the app and checked the secret number. I made guesses above and below the secret number to make sure the hints were correct. I also made sure to check edge cases like 1 and 50 for normal and 1 to 20 for easy and 1 to 100 for hard, numbers one under or over the secret number. Then I looked through the rest of the app to see if the changes Claude made affected another part of the app like entering the actual secret number to check if the winning condition was still working, verifying point calculations. This showed me the my current code did end up giving the user the correct hints and didn't mess up other parts of the app.
 
-  - After I manually tested the hints, I also asked AI to help me design tests for the hints bug. I explained the fix again in a new session and asked it to write tests in a test_game_logic.py file which i reviewed and ran and verified they all passed.
+  - After I manually tested the hints, I also asked AI to help me design tests for the hints bug. I explained the fix again in a new session and its intended behavior is detail and asked it to write tests in a test_game_logic.py file which I reviewed and ran and verified they all passed.
 
 ---
 
@@ -58,7 +58,7 @@ Document at least 3 bugs you found. Add rows as needed.
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
 
-  - Streamlit reruns starts the entire program from scratch whenever anything changes most memory from a previous run is cleared. The only exception is a session state which is never cleared and keeps data of anything you want between each session. Session states are useful for remembering things like user choices, progress or previous results.
+  - Streamlit reruns starts the entire program from scratch whenever anything changes and most memory from a previous run is cleared. The only exception is a session state which is never cleared and keeps data of anything you want between each session. Session states are useful for remembering things like user choices, progress or previous results.
 
 ---
 
@@ -69,8 +69,8 @@ Document at least 3 bugs you found. Add rows as needed.
 - What is one thing you would do differently next time you work with AI on a coding task?
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
 
-  - One habit I would like to take away from this project is commiting more often in Github and testing before commits. Although I commited for every few fixes sometimes and not just one fix I want to work on updating Github more often and testing more often even if it feels redundant so I can keep my progress trackable.
+  - One habit I would like to take away from this project is commiting more often in Github and testing before commits. Although I commited once for every few fixes sometimes and not just one fix, I want to work on updating Github more often and testing more often even if it feels redundant so I can keep my progress trackable.
 
   - I would like to be more organized with the AI tool I'm using for future projects by starting off broadly and understanding the code first before diving down on small details in the beginning. This is to have a deeper understanding of the code to catch more obvious bugs before I ask AI to debug harder ones because I ended up overlooking some bugs I could have fixed easily because I was too focused on the AI fixing a particular bug. 
 
-  - I previously thought AI generating code and debugging is more advanced but now I believe AI generated code is very unreliable as of right now when making applications or debugging them so human input is needed. However, with a person veryifying the AI's changes and testing it frequently AI is a great tool for debugging.
+  - I previously thought AI generating code and debugging requires less human fact checking but now I believe AI generated code is pretty unreliable as of right now on its own when making applications or debugging them, so human input is needed. However, with a person veryifying the AI's changes and testing it frequently, AI is a great tool for debugging.
